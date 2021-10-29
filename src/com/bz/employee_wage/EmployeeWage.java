@@ -3,23 +3,18 @@ package com.bz.employee_wage;
 import java.util.Random;
 
 public class EmployeeWage {
+	// Constants
 	final static int IS_PART_TIME = 1;
 	final static int IS_FULL_TIME = 2;
-	static int EMP_RATE_PER_HOUR = 100;
-	static int NO_OF_WORKING_DAYS = 20;
-	static int MAX_HRS_IN_THE_MONTH = 10;
-	int empHrs;
-	int totalEmpHrs = 0;
-	int totalWorkingDays = 0;
-	int totalEmpWage = 0;
 
 	/*
-	 * calculate employee present or absent using random function. calculating
-	 * employee wage. Added part time to calculate employee wage. Applied switch
-	 * statement.
+	 * created function and passed the parameter to calculate total employee wage
+	 * for particular company. by passing arguments inside function
 	 */
-	public void calculateEmpWage() {
-		while (totalEmpHrs <= MAX_HRS_IN_THE_MONTH && totalWorkingDays < NO_OF_WORKING_DAYS) {
+	public static int calculateEmployeeWage(String company, int empRatePerHr, int numOfWorkingDays,
+			int maxHrsPerMonth) {
+		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+		while (totalEmpHrs <= maxHrsPerMonth && totalWorkingDays < numOfWorkingDays) {
 			totalWorkingDays++;
 			Random random = new Random();
 			int empCheck = random.nextInt(3);
@@ -34,23 +29,16 @@ public class EmployeeWage {
 				empHrs = 0;
 				break;
 			}
+			totalEmpHrs += empHrs;
+			System.out.println("Days#" + totalWorkingDays + "EmpHrs :" + empHrs);
 		}
-	}
-
-	public int empHour() {
-		System.out.println("Days#" + totalWorkingDays + "EmpHrs :" + empHrs);
-		return totalEmpHrs += empHrs;
-	}
-
-	public int totalEmpWage() {
-		int value = empHour();
-		return totalEmpWage = value * EMP_RATE_PER_HOUR;
+		int totalEmpWage = totalEmpHrs * empRatePerHr;
+		System.out.println("Total Emp Wage for company:" + company + "is:" + totalEmpWage);
+		return totalEmpWage;
 	}
 
 	public static void main(String[] args) {
-		EmployeeWage obj = new EmployeeWage();
-		obj.calculateEmpWage();
-		obj.totalEmpWage();
-		System.out.println("Total Emp Wage:" + obj.totalEmpWage);
+		calculateEmployeeWage("jio", 20, 3, 15);
+		calculateEmployeeWage("airtel", 20, 3, 15);
 	}
 }
